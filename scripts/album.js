@@ -29,13 +29,30 @@ var albumPicasso = {
      ]
  };
 
- var setCurrentAlbum = function(album) {
-     // #1
+var albumTool = {
+     title: 'Ænima',
+     artist: 'Tool',
+     label: 'Zoo Entertainment',
+     year: '1996',
+     albumArtUrl: 'https://upload.wikimedia.org/wikipedia/en/2/2f/Aenima.jpg',
+     songs: [
+         { title: 'Stinkfist', duration: '1:01' },
+         { title: 'Eulogy', duration: '5:01' },
+         { title: 'H.', duration: '3:21'},
+         { title: 'Third Eye', duration: '3:14' },
+         { title: 'Ænima', duration: '2:15'}
+     ]
+ };
+
+ // #1
      var albumTitle = document.getElementsByClassName('album-view-title')[0];
      var albumArtist = document.getElementsByClassName('album-view-artist')[0];
      var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
      var albumImage = document.getElementsByClassName('album-cover-art')[0];
      var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
+ var setCurrentAlbum = function(album) {
+    
  
      // #2
      albumTitle.firstChild.nodeValue = album.title;
@@ -54,7 +71,18 @@ var albumPicasso = {
  
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+     
+     var albums = [albumPicasso, albumMarconi, albumTool];
+     var index = 1;
+     albumImage.addEventListener("click", function(event) {
+        setCurrentAlbum(albums[index]);
+        index++;
+        if (index == albums.length){
+            index = 0;
+        }
+    });
  };
+
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
