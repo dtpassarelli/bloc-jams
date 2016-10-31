@@ -260,6 +260,25 @@ var togglePlayFromPlayerBar = function () {
     
 };
 
+var setCurrentTimeInPlayerBar = function (filterTimeCode(currentTime)) {
+    $('.current-time').text(currentTime);
+    updateSeekBarWhileSongPlays();
+};
+
+var setTotalTimeInPlayerBar = function (filterTimeCode(totalTime)) {
+    $('.total-time').text(totalTime);
+    updatePlayerBarSong();
+};
+
+var filterTimeCode = function (timeInSeconds) {
+    parseFloat(timeInSeconds);
+    var wholeSeconds = Math.floor(timeInSeconds)
+    var wholeMinutes = Math.floor(timeInMinutes);
+    return wholeMinutes + ":" + wholeSeconds;
+}
+
+filterTimeCode(setCurrentTimeInPlayerBar);
+filterTimeCode(setTotalTimeInPlayerBar);
 
  
  $(document).ready(function() {
@@ -271,7 +290,7 @@ var togglePlayFromPlayerBar = function () {
      
       
  });
-var createSongRow = function(songNumber, songName, songLength) {
+var createSongRow = function(filterTimeCode(songNumber), songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
